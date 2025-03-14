@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from services.mercado_bitcoin import MercadoBitcoin
-import sys
+from model_response import MMSResultResponse
 
 app = FastAPI()
 
 # "from" é uma keyword do python, não é possivel usa-la como variavel
 @app.get("/{pair}/mms")
-async def index(pair: str, from_timestamp: float, to_timestamp: float, range: int):
+async def index(pair: str, from_timestamp: float, to_timestamp: float, range: int) -> list[MMSResultResponse]:
     
     try:
         mb = MercadoBitcoin()

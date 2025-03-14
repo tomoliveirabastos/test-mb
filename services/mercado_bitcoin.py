@@ -2,6 +2,8 @@ from functools import reduce
 from datetime import datetime, timedelta
 import os
 from json import loads
+from pydantic import BaseModel
+
 
 class MMSResult:
     timestamp: int
