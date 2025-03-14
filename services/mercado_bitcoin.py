@@ -29,12 +29,12 @@ class MercadoBitcoin:
         return pair.upper() in ['BRLBTC', 'BRLETH']
 
 
-    def chamar_api_mercado_bitcoin(self, pair: str, range: int, from_timestamp: float, to_timestamp: float):
+    def chamar_api_mercado_bitcoin(self, pair: str, from_timestamp: float, to_timestamp: float):
         '''
         a cloudflare estava bloqueando as requests das libs requests e urllib3
         todo: ver o porque essas requests sao bloqueadas
         '''
-        url = f"curl 'https://mobile.mercadobitcoin.com.br/v4/{pair}/candle?from={int(from_timestamp)}&to={int(to_timestamp)}&precision={range}d' \
+        url = f"curl 'https://mobile.mercadobitcoin.com.br/v4/{pair}/candle?from={int(from_timestamp)}&to={int(to_timestamp)}&precision=1d' \
             -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0' \
             --compressed"
         print(url)
@@ -48,22 +48,11 @@ class MercadoBitcoin:
 
         return j
 
-    def api_candle_mb(self, pair: str, range: int, from_timestamp: float, to_timestamp: float = None):
-        
-        if self.verifica_se_o_pair_esta_correto(pair) == False:
-            raise Exception("pair precisa ser ['BRLBTC' ou 'BRLETH']")
+    def api_candle_mb(self, pair: str, range: int, from_timestamp: float, to_timestamp: float = None) -> list[MMSResultResponse]:
 
-        if self.verifica_timestamp_maior_que_365_dias(from_timestamp) == True:
-            raise Exception("timestamp de from maior que 365 dias")
+        r = self.chamar_api_mercado_bitcoin(pair, from_timestamp, to_timestamp)
 
-        if to_timestamp == None:
-            dd = datetime.now() - timedelta(days=1)
-            to_timestamp = dd.timestamp()
-
-        r = self.chamar_api_mercado_bitcoin(pair, range, from_timestamp, to_timestamp)
-
-        return self.calcular_mms(r['candles'], [20, 50, 200], pair)
-
+        return self.calcular_mms(r['candles'], [range], pair)
 
     def retorna_media(self, valores: list[float]) -> float:
 
