@@ -1,6 +1,7 @@
 from functools import reduce
 from datetime import datetime, timedelta
 import os
+from model_response import MMSResultResponse
 from json import loads
 
 class MMSResult:
@@ -75,13 +76,20 @@ class MercadoBitcoin:
 
         return s / divisor
 
-    def calcular_mms(self, resultados_mb_api: list[dict], days:list[int], pair: str = "BRLBTC") -> list[MMSResult]:
+    def calcular_mms(self, resultados_mb_api: list[dict], days:list[int], pair: str = "BRLBTC") -> list[MMSResultResponse]:
 
         l = []
 
         for k, r in enumerate(resultados_mb_api):
 
-            mms_result = MMSResult()
+            mms_result = MMSResultResponse(
+                timestamp=0,
+                pair="",
+                mms_20=0,
+                mms_50=0,
+                mms_200=0
+            )
+
             mms_result.timestamp = r["timestamp"]
             mms_result.pair = pair
 

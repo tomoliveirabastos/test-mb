@@ -1,18 +1,19 @@
 from fastapi import FastAPI, Request
 from services.mercado_bitcoin import MercadoBitcoin
 from model_response import MMSResultResponse
+
 import time
 
 app = FastAPI()
 
-# @app.middleware("http")
-# async def watch_request(request: Request, call_next):
-#     start_time = time.perf_counter()
-#     response = await call_next(request)
+@app.middleware("http")
+async def watch_request(request: Request, call_next):
+    start_time = time.perf_counter()
+    response = await call_next(request)
 
-#     process_time = time.perf_counter() - start_time
-#     response.headers["X-Process-Time"] = str(process_time)
-#     return response
+    process_time = time.perf_counter() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
     
 
 @app.get("/{pair}/mms")
