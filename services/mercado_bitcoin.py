@@ -2,8 +2,6 @@ from functools import reduce
 from datetime import datetime, timedelta
 import os
 from json import loads
-from pydantic import BaseModel
-
 
 class MMSResult:
     timestamp: int
@@ -91,7 +89,8 @@ class MercadoBitcoin:
                 mms_result.__setattr__(f"mms_{day}", None)
 
                 if day > k:
-                    continue                
+                    continue
+                      
                 start_position = abs(k - day)
                 resultados_splice = resultados_mb_api[start_position:k]
                 m = self.retorna_media([x['close'] for x in resultados_splice])
