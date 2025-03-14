@@ -74,9 +74,9 @@ class MercadoBitcoin:
             mms_result = MMSResultResponse(
                 timestamp=0,
                 pair="",
-                mms_20=0,
-                mms_50=0,
-                mms_200=0
+                mms_20=None,
+                mms_50=None,
+                mms_200=None
             )
 
             mms_result.timestamp = r["timestamp"]
