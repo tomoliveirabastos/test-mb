@@ -1,7 +1,5 @@
 # test-mb
 
-![ScreenShot](image.jpeg)
-
 ### Dependências
 ```bash
 uv - geranciador de pacotes https://github.com/astral-sh/uv
