@@ -38,7 +38,7 @@ uv sync
 
 após rodar todos comandos e instalar o mysql e curl você terá que executar o comando para criar o banco de dados:
 ```bash
-    uv run migrate.py
+uv run migrate.py
 ```
 
 executar o comando do worker para plotar dados:
@@ -59,3 +59,6 @@ A necessidade de colocar o numero de dias no primeiro argumento do worker é par
 
 ### Documentação de referencia da api
 http://127.0.0.1/docs
+
+### Exemplo de requets
+http://127.0.0.1:8000/BRLBTC/mms?from_timestamp=1712004438&to_timestamp=1742004438&range=20
