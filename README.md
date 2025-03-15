@@ -53,6 +53,11 @@ ou
 make
 ```
 
+### executar tests
+```bash
+uv run test.py
+```
+
 Para executar diariamente a busca na API do mercadobitcoin precisará colocar o worker na execução do cronjobs,
 no arquivo crontab tem um exemplo de linha de execução no crontab.
 A necessidade de colocar o numero de dias no primeiro argumento do worker é para fazer a contagem do dia de hoje para trás, ou seja se o argumento for 2, vai contar de hoje até 2 dias atrás.

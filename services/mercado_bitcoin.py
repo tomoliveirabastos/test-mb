@@ -101,6 +101,10 @@ class MercadoBitcoin:
             mms_result.pair = pair
 
             for day in days:
+
+                if not hasattr(mms_result, f"mms_{day}"):
+                    continue
+                
                 mms_result.__setattr__(f"mms_{day}", None)
 
                 if day > k:
