@@ -1,6 +1,6 @@
 # test-mb
 
-### Dependencias
+### Dependências
 ```bash
 uv - geranciador de pacotes https://github.com/astral-sh/uv
 fastapi - framework web https://fastapi.tiangolo.com/
