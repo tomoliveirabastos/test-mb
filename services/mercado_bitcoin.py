@@ -55,23 +55,22 @@ class MercadoBitcoin:
         session = get_session()
         
         sql = text('''
-            select * from candles where 
-                timestamp <= :inicio and
-                timestamp >= :fim and
-                pair = :pair
+            select * from candles where `timestamp` >= :inicio and `timestamp` <= :fim and pair = :pair        
         ''')
 
-        result = session.execute(sql, {
+        cursor = session.execute(sql, {
             "pair": pair,
             "inicio": inicio,
             "fim": fim
         })
 
-        return result
+        cursor = [cc._asdict() for cc in cursor]
+
+        return cursor
 
     def api_candle_mb(self, pair: str, range: int, from_timestamp: float, to_timestamp: float = None) -> list[MMSResultResponse]:
         r = self.chamar_pelo_banco_de_dados(pair, from_timestamp, to_timestamp)
-
+        
         return self.calcular_mms(r, [range], pair)
 
     def retorna_media(self, valores: list[float]) -> float:
