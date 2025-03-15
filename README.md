@@ -1,6 +1,7 @@
 # test-mb
 
 ### Dependencias
+```bash
 uv - geranciador de pacotes https://github.com/astral-sh/uv
 fastapi - framework web https://fastapi.tiangolo.com/
 sqlalchemy - orm de bancos de dados https://www.sqlalchemy.org/
@@ -9,6 +10,7 @@ docker/docker-compose - container da aplicacao https://www.docker.com/
 make - para automatizar comandos e sequencias de tarefas para facilitar o trabalho
 curl - para requisicoes
 crontab - para executar o work em segundo plano
+```
 
 ### para buildar voce pode usar o comando make container, ele vai criar os containers de docker e setar o nginx como proxy e loadbalance
 
@@ -59,7 +61,6 @@ uv run test.py
 ou
 docker exec -t ap1 python test.py
 ```
-
 
 Para executar diariamente a busca na API do mercadobitcoin precisará colocar o worker na execução do cronjobs,
 no arquivo crontab tem um exemplo de linha de execução no crontab.
