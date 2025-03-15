@@ -1,1 +1,2 @@
 0 0 * * * docker exec -it ap1 python worker.py 2
+0 0 * * * docker exec -it ap1 python verificar_365_dias.py

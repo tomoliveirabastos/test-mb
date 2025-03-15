@@ -13,6 +13,9 @@ services:
           DB_PORT: 3306
           DB_NAME: mb_test
           DB_USERNAME: root
+          EMAIL_HOST: smtp@test.com
+          EMAIL_FROM: test@test.com
+          EMAIL_PASSWORD: senhaaqui
         command: fastapi dev app.py
         networks:
           vpcbr:
