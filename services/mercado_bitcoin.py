@@ -5,7 +5,6 @@ import os
 from sqlalchemy import text
 from model_response import MMSResultResponse
 from json import loads
-from models.candles import Candles
 
 class MMSResult:
     timestamp: int
