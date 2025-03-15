@@ -1,8 +1,11 @@
 from functools import reduce
-from datetime import datetime, timedelta
+from datetime import datetime
+from db import get_session
 import os
+from sqlalchemy import text
 from model_response import MMSResultResponse
 from json import loads
+from models.candles import Candles
 
 class MMSResult:
     timestamp: int
@@ -48,11 +51,27 @@ class MercadoBitcoin:
 
         return j
 
+    def chamar_pelo_banco_de_dados(self, pair, inicio, fim):
+        session = get_session()
+        
+        sql = text(''''
+            select * from candles where 
+                from_timestamp >= :inicio and
+                to_timestamp >= :fim and
+                pair = :pair
+        ''')
+
+        result = session.execute(sql, {
+            "pair": pair,
+            "inicio": inicio,
+            "fim": fim})
+
+        return result
+
     def api_candle_mb(self, pair: str, range: int, from_timestamp: float, to_timestamp: float = None) -> list[MMSResultResponse]:
+        r = self.chamar_pelo_banco_de_dados(pair, from_timestamp, to_timestamp)
 
-        r = self.chamar_api_mercado_bitcoin(pair, from_timestamp, to_timestamp)
-
-        return self.calcular_mms(r['candles'], [range], pair)
+        return self.calcular_mms(r, [range], pair)
 
     def retorna_media(self, valores: list[float]) -> float:
 

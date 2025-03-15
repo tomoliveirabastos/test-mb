@@ -1,1 +1,0 @@
-from services.mercado_bitcoin import MercadoBitcoin

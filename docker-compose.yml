@@ -1,0 +1,65 @@
+services:
+    ap1:
+        container_name: ap1
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+          - "8000:8000"
+        environment:
+          DB_PASSWORD: 123Mudar
+          DB_HOST: 10.5.0.12
+          DB_PORT: 3306
+          DB_NAME: mb_test
+          DB_USERNAME: root
+        command: fastapi dev app.py
+        networks:
+          vpcbr:
+            ipv4_address: 10.5.0.6
+        depends_on:
+          - mysql_user_api
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.4'
+                    memory: '0.3GB'
+
+    mysql_user_api:
+      container_name: mysql-user-api
+      image: mysql:8.0.41-debian
+      restart: always
+      ports:
+        - "3306:3306"
+        - "33060:33060"
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.12
+      environment:
+        MYSQL_ROOT_PASSWORD: 123Mudar
+
+    nginx:
+        container_name: nginx
+        image: nginx:alpine
+        restart: always
+        volumes:
+            - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+        ports:
+          - 9999:9999
+        depends_on:
+          - ap1
+        networks:
+          vpcbr:
+            ipv4_address: 10.5.0.4
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.1'
+                    memory: '0.2GB'
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
