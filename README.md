@@ -10,6 +10,7 @@ docker/docker-compose - container da aplicacao https://www.docker.com/
 make - para automatizar comandos e sequencias de tarefas para facilitar o trabalho
 curl - para requisicoes
 crontab - para executar o work em segundo plano
+python - versão 3.10
 ```
 
 ### para buildar voce pode usar o comando make container, ele vai criar os containers de docker e setar o nginx como proxy e loadbalance
@@ -36,6 +37,8 @@ você precisará instalar o mysql, curl
 usar o comando:
 ```bash
 uv sync
+ou
+pip install -r requirements.txt
 ```
 
 após rodar todos comandos e instalar o mysql e curl você terá que executar o comando para criar o banco de dados:
