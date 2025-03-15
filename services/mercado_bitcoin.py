@@ -54,17 +54,18 @@ class MercadoBitcoin:
     def chamar_pelo_banco_de_dados(self, pair, inicio, fim):
         session = get_session()
         
-        sql = text(''''
+        sql = text('''
             select * from candles where 
-                from_timestamp >= :inicio and
-                to_timestamp >= :fim and
+                timestamp <= :inicio and
+                timestamp >= :fim and
                 pair = :pair
         ''')
 
         result = session.execute(sql, {
             "pair": pair,
             "inicio": inicio,
-            "fim": fim})
+            "fim": fim
+        })
 
         return result
 
