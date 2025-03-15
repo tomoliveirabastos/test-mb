@@ -56,7 +56,10 @@ make
 ### executar tests
 ```bash
 uv run test.py
+ou
+docker exec -t ap1 python test.py
 ```
+
 
 Para executar diariamente a busca na API do mercadobitcoin precisará colocar o worker na execução do cronjobs,
 no arquivo crontab tem um exemplo de linha de execução no crontab.
