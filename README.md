@@ -70,7 +70,7 @@ no arquivo crontab tem um exemplo de linha de execução no crontab.
 A necessidade de colocar o numero de dias no primeiro argumento do worker é para fazer a contagem do dia de hoje para trás, ou seja se o argumento for 2, vai contar de hoje até 2 dias atrás.
 
 ### Documentação de referencia da api
-http://127.0.0.1/docs
+http://127.0.0.1:8000/docs
 
 ### Exemplo de request
 http://127.0.0.1:8000/BRLBTC/mms?from_timestamp=1712004438&to_timestamp=1742004438&range=20
