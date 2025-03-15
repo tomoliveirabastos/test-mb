@@ -34,6 +34,14 @@ docker exec -t ap1 python migrate.py
 docker exec -t ap1 python worker.py :numero_de_dias
 ```
 
+# executar worker para notificar os dias que nao foram inserir no banco de dados
+```bash
+docker exec -t ap1 python worker_365.py
+ou
+uv run.py worker_365.py
+```
+
+
 # buidar sem docker
 você precisará instalar o mysql, curl
 usar o comando:
@@ -70,6 +78,8 @@ docker exec -t ap1 python test.py
 Para executar diariamente a busca na API do mercadobitcoin precisará colocar o worker na execução do cronjobs,
 no arquivo crontab tem um exemplo de linha de execução no crontab.
 A necessidade de colocar o numero de dias no primeiro argumento do worker é para fazer a contagem do dia de hoje para trás, ou seja se o argumento for 2, vai contar de hoje até 2 dias atrás.
+
+Isso também vale para o script de notificação dos dias que não estão no banco de dados, também tem um exemplo no arquivo crontab de como deixar executando automaticamente todos os dias
 
 ### Documentação de referencia da api
 http://127.0.0.1:8000/docs

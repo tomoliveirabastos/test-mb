@@ -10,7 +10,7 @@ class Verifica365:
     def get_todas_as_datas_de_um_ano_ate_hoje(self) -> list[str]:
         datas = []
 
-        for d in range(1, 365):      
+        for d in range(1, 365):
             dia_subtraido = (datetime.now() - timedelta(days=d))
             datas.append(dia_subtraido.strftime("%Y-%m-%d"))
 
@@ -62,5 +62,3 @@ class Verifica365:
                 ','.join(registros)
             )
             v.send_email_de_notificacao(message)
-
-Verifica365.notificar()
